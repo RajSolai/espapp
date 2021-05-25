@@ -98,7 +98,7 @@ class _Home extends State<Home> {
         body: Center(
           child: Column(children: <Widget>[
             SizedBox(height: 30),
-            Container(height: 260.0, child: Image.asset("assets/esplogo.png")),
+            Container(height: 260.0, child: Image.asset("assets/esp.png")),
             // SizedBox(
             // 	height:20
             // ),
