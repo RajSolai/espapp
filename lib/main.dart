@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ESP - Control',
-      home: home(),
+      home: Home(),
     );
   }
 }
