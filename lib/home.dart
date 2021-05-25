@@ -1,6 +1,6 @@
+import 'package:espapp/services/espservice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -8,41 +8,6 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  Future<void> makeRequest(String gpio, String ctrl) async {
-    if (gpio == "test") {
-      await http
-          .get("http://192.168.4.1/test" + "/" + ctrl)
-          .then((data) => {print(data.body)})
-          .catchError((err) => {print(err), _noEspAlert()});
-    } else {
-      await http
-          .get("http://192.168.4.1/gpio/" + gpio + "/" + ctrl)
-          .then((data) => {print(data.body)})
-          .catchError((err) => {print(err), _noEspAlert()});
-    }
-  }
-
-  Future<void> _noEspAlert() async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
-            title: Text("ESP not found"),
-            content: Text(
-                "Hey, It seems You are not connected to ESP's Wifi AP(Hotspot)"),
-            actions: <Widget>[
-              CupertinoButton(
-                  child: Text("Okay"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  })
-            ],
-          );
-        });
-  }
-
   Future<void> _espRouterAlert() async {
     await showDialog(
         context: context,
@@ -127,11 +92,13 @@ class _Home extends State<Home> {
                   CupertinoButton(
                       color: Color(0xFFff0800),
                       child: Text("3 off"),
-                      onPressed: () => makeRequest('3', 'off')),
+                      onPressed: () =>
+                          EspService().makeRequest('3', 'off', context)),
                   CupertinoButton(
                       color: Color(0xFF53d769),
                       child: Text("3 on"),
-                      onPressed: () => makeRequest('3', 'on')),
+                      onPressed: () =>
+                          EspService().makeRequest('3', 'on', context)),
                 ])),
             // SizedBox(
             // 	height:20
@@ -161,11 +128,13 @@ class _Home extends State<Home> {
                   CupertinoButton(
                       color: Color(0xFFff0800),
                       child: Text("5 off"),
-                      onPressed: () => makeRequest('5', 'off')),
+                      onPressed: () =>
+                          EspService().makeRequest('5', 'off', context)),
                   CupertinoButton(
                       color: Color(0xFF53d769),
                       child: Text("5 on"),
-                      onPressed: () => makeRequest('5', 'on')),
+                      onPressed: () =>
+                          EspService().makeRequest('5', 'on', context)),
                 ])),
           ]),
         ));
